@@ -1,0 +1,59 @@
+openapi: 3.0.3
+info:
+  title: STD24059 - TD4
+  version: 1.0.0
+paths:
+  /products:
+    get:
+      parameters:
+        - $ref: '#/components/parameters/limit'
+        - $ref: '#/components/parameters/q'
+      responses:
+        '200':
+          description: List of products
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Product'
+              examples:
+                multipleProducts:
+                  value:
+                    - name: "Product1"
+                      expiration_datetime: "2025-12-31T23:59:59Z"
+                      price: 10.99
+                    - name: "Product2"
+                      expiration_datetime: "2026-01-01T00:00:00Z"
+                      price: 20.49
+                emptyList:
+                  summary: Empty list
+                  value: []
+components:
+  schemas:
+    Product:
+      type: object
+      properties:
+        name:
+          type: string
+        expiration_datetime:
+          type: string
+          format: date-time
+        price:
+          type: number
+          format: float
+  parameters:
+    limit:
+      name: limit
+      in: query
+      schema:
+        type: integer
+      required: false
+      description: Maximum number of elements
+    q:
+      name: q
+      in: query
+      schema:
+        type: string
+      required: false
+      description: Search term
