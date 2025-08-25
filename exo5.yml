@@ -27,7 +27,7 @@ paths:
         - $ref: '#/components/parameters/page'
         - $ref: '#/components/parameters/size'
       responses:
-        '200':
+        200:
           description: List of orders
           content:
             application/json:
